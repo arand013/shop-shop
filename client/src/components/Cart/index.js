@@ -36,7 +36,51 @@ const Cart = () => {
         }
     }, [cart.length, dispatch]);
 
-    
+
+    function toggleCart() {
+        dispatch({ type: TOGGLE_CART });
+    };
+
+    useEffect(() => {
+        if (data) {
+            stripePromise.then(res => {
+                res.redirectToCheckout({ sessionId: data.checkout.session });
+            });
+        }
+    }, [data]
+    );
+
+    function calculateTotal() {
+        let sum = 0;
+        cart.forEach(item => {
+            sum += item.price * item.purchaseQuantity;
+        });
+        return sum.toFixed(2);
+    };
+
+    function submitCheckout() {
+        const productIds = [];
+
+        cart.forEach(item => {
+            for (let i = 0; i < item.purchaseQuantity; i++) {
+                productIds.push(item._id);
+            }
+        });
+
+        getCheckout({
+            variables: { products: productIds }
+        });
+    };
+
+    if (!cartOpen) {
+        return (
+            <div className="cart-closed" onClick={toggleCart}>
+                <span role="img" aria-label="cart">🛒</span>
+            </div>
+        );
+    }
+
+
     return (
         <div className="cart">
             <div className="close" onClick={toggleCart}>[close]</div>
