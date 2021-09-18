@@ -30,6 +30,14 @@ function CategoryMenu() {
           });
       }
   }, [categoryData, loading, dispatch]);
+   
+  const handleClick = id => {
+    dispatch({
+        type: UPDATE_CURRENT_CATEGORY,
+        currentCategory: id
+    });
+};
+
   return (
     <div>
         <h2>Choose a Category:</h2>
