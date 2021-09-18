@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
@@ -35,7 +34,6 @@ const Cart = () => {
             getCart();
         }
     }, [cart.length, dispatch]);
-
 
     function toggleCart() {
         dispatch({ type: TOGGLE_CART });
@@ -79,7 +77,6 @@ const Cart = () => {
             </div>
         );
     }
-
 
     return (
         <div className="cart">
