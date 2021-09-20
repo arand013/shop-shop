@@ -68,6 +68,7 @@ const Cart = () => {
         getCheckout({
             variables: { products: productIds }
         });
+        console.log (productIds)
     };
 
     if (!cartOpen) {
@@ -92,11 +93,11 @@ const Cart = () => {
                             <strong>Total: ${calculateTotal()}</strong>
                             {
                                 Auth.loggedIn() ?
-                                    <button onClick={submitCheckout}>
+                                    (<button onClick={submitCheckout}>
                                         Checkout
-                                    </button>
+                                    </button>)
                                     :
-                                    <span>(log in to check out)</span>
+                                   ( <span>(log in to check out)</span>)
                             }
                         </div>
                     </div>
